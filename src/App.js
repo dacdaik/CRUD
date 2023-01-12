@@ -8,12 +8,25 @@ function App() {
     const [API, setAPI] = useState([]);
     const [name, setName] = useState([]);
     const [pass, setPass] = useState([]);
+    const [checker, setchecker] = useState(false);
+    console.log(checker);
     // console.log(API);
     useEffect(() => {
         axios.get(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`).then((response) => {
             setAPI(response.data);
         });
     }, []);
+
+    const postData = () =>{
+        console.log("abc");
+        axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
+            name,
+            pass,
+            checker
+        }
+        )
+        setName("")
+    }
 
     const InputName = (e) => {
         setName(e.target.value);
@@ -22,10 +35,19 @@ function App() {
     const InputPass = (e) => {
         setPass(e.target.value);
     };
+    const InputCheck = (e) => {
+        // console.log(check);
+        setchecker(!checker);
+    };
 
     return (
         <>
-            <NewMember InputName={InputName} InputPass={InputPass} />
+            <NewMember 
+             InputName={InputName}
+             InputPass={InputPass}
+             InputCheck={InputCheck}
+             postData = {postData}
+             />
             <Data API={API} />
         </>
     );

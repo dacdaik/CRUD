@@ -7,9 +7,9 @@ function NewMember(props) {
             <h2>Mật Khẩu</h2>
             <input onChange={props.InputPass} placeholder="Nhập Mật khẩu" className="textInput" />
             <br />
-            <input type="checkbox" />
+            <input type="checkbox" onChange={props.InputCheck}/>
             <label for="vehicle1"> Tôi đồng ý</label>
-            <button className="btn"> SEND </button>
+            <button className="btn" onClick={props.postData} type='submit'> SEND </button>
         </div>
     );
 }

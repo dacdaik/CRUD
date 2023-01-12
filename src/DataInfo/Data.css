@@ -1,0 +1,8 @@
+.nameData{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.nameData-info{
+    width: 300px;
+    height: 300px;
+}
