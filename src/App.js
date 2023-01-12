@@ -20,7 +20,7 @@ function App() {
 
     const postData = async () => {
         console.log('abc');
-        const data = await axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
+        const { data } = await axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
             name,
             pass,
             checker,
