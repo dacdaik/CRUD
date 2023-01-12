@@ -6,10 +6,11 @@ import NewMember from './new';
 
 function App() {
     const [API, setAPI] = useState([]);
+    // const [apis, setApis] = useState([]);
     const [name, setName] = useState([]);
     const [pass, setPass] = useState([]);
-    const [checker, setchecker] = useState(false);
-    console.log(checker);
+    const [checker, setChecker] = useState(false);
+    // console.log(checker);
     // console.log(API);
     useEffect(() => {
         axios.get(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`).then((response) => {
@@ -17,16 +18,18 @@ function App() {
         });
     }, []);
 
-    const postData = () =>{
-        console.log("abc");
-        axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
+    const postData = async () => {
+        console.log('abc');
+        const data = await axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
             name,
             pass,
-            checker
-        }
-        )
-        setName("")
-    }
+            checker,
+        });
+        setAPI([...API, { ...data }]);
+        setName('');
+        setPass('');
+        setChecker(false);
+    };
 
     const InputName = (e) => {
         setName(e.target.value);
@@ -37,17 +40,20 @@ function App() {
     };
     const InputCheck = (e) => {
         // console.log(check);
-        setchecker(!checker);
+        setChecker(!checker);
     };
 
     return (
         <>
-            <NewMember 
-             InputName={InputName}
-             InputPass={InputPass}
-             InputCheck={InputCheck}
-             postData = {postData}
-             />
+            <NewMember
+                InputName={InputName}
+                name={name}
+                pass={pass}
+                checker={checker}
+                InputPass={InputPass}
+                InputCheck={InputCheck}
+                postData={postData}
+            />
             <Data API={API} />
         </>
     );
