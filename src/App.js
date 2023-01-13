@@ -19,7 +19,7 @@ function App() {
     }, []);
 
     const postData = async () => {
-        console.log('abc');
+        // console.log('abc');
         const { data } = await axios.post(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`, {
             name,
             pass,
@@ -43,6 +43,30 @@ function App() {
         setChecker(!checker);
     };
 
+    const onDelete = async (id) => {
+        await axios.delete(`https://63a44e2a821953d4f2b0637d.mockapi.io/name/${id.id}`).then(() => {
+            axios.get(`https://63a44e2a821953d4f2b0637d.mockapi.io/name`).then((response) => {
+                setAPI(response.data);
+            });
+        });
+        // setAPI([{ ...API }]);
+        console.log(API);
+    };
+
+    // handleOnclickDeleteItem = async (item) => {
+    //     try {
+    //         await Api.DeleteItem(item.id);
+    //         const res = await Api.getList()
+    //         this.setState((prevState) => ({
+    //             ...prevState,
+    //             todoList: res.data,
+    //             content: ""
+    //         }));
+    //     } catch (error) {
+    //         console.log('error', error);
+    //     }
+    // }
+
     return (
         <>
             <NewMember
@@ -54,7 +78,7 @@ function App() {
                 InputCheck={InputCheck}
                 postData={postData}
             />
-            <Data API={API} />
+            <Data API={API} onDelete={onDelete} />
         </>
     );
 }
